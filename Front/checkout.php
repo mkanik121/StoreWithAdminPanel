@@ -145,7 +145,8 @@
                                 <label class="custom-control-label" for="COD">Cash On Delivery</label>
                             </div>
                         </div>
-                        <button class="btn btn-block btn-primary font-weight-bold py-3" type="submit">Place Order</button>
+                        <!-- <button class="btn btn-block btn-primary font-weight-bold py-3" type="submit">Place Order</button> -->
+                        <input type="submit" name="checkout" class="btn btn-block btn-primary font-weight-bold py-3" value="Place Order">
                         <!-- <button class="btn btn-block btn-primary font-weight-bold py-3 checkout" onclick="checkout()" data-user="<?php  echo $id; ?>" data-product="<?php  echo $PId; ?>" data-cart="<?php  echo $cartId; ?>">Place Order</button> -->
                     </div>
                 </div>

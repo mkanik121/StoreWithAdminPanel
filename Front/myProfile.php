@@ -30,6 +30,8 @@
 
 
                 <div class="bg-light p-30 mb-5">
+      <form action="functions.php" method="post">
+l
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>Full Name</label>
@@ -48,7 +50,7 @@
                             <input class="form-control" name="mobile" type="text" value="<?php echo $sql['Mobile']; ?>">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Address Line 1</label>
+                            <label>Address</label>
                             <input class="form-control" name="address" type="text" value="<?php echo $sql['Address']; ?>">
                         </div>
                         <div class="col-md-6 form-group">
@@ -59,19 +61,11 @@
                             <label>ZIP Code</label>
                             <input class="form-control" name="zip" type="text" >
                         </div>
-                        <div class="col-md-12 form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="newaccount">
-                                <label class="custom-control-label" for="newaccount">Create an account</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="shipto">
-                                <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Ship to different address</label>
-                            </div>
-                        </div>
+                        <button class="btn btn-block btn-primary font-weight-bold py-3" type="submit">Update Info</button>
+
                     </div>
+      </form>
+
                 </div>
 
     <!-- Main Body End -->
@@ -80,7 +74,6 @@
 <?php include('layout/footer.php'); ?>
 
 <!-- JavaScript Libraries -->
-<?php include('layout/script.php'); ?>
 
 </body>
 

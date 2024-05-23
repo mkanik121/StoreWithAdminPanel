@@ -114,6 +114,7 @@
                             </div>
                         </form>
                     </div>
+             <form action="functions.php" method="POST">
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
@@ -127,10 +128,19 @@
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
-                        </div><a class="btn btn-primary px-3 add-to-cart" data-id="<?php echo $row['ProductId']; ?>">
-                        <i class="fa fa-shopping-cart mr-1"></i> Add To
-                            Cart</a>
+                        </div>
+                        <?php if(!empty($sessionId)){ ?> 
+
+                        <a class="btn btn-primary px-3 add-to-cart" data-id="<?php echo $row['ProductId']; ?>">
+                        <i class="fa fa-shopping-cart mr-1"></i> Add ToCart</a>
+                        <?php }else{ ?>
+                            <a class="btn btn-primary px-3" onclick="ShowLogin()">
+                        <i class="fa fa-shopping-cart mr-1"></i> Add ToCart</a>
+                      <?php   }  ?>
+
                     </div>
+              </form>
+
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Share on:</strong>
                         <div class="d-inline-flex">
@@ -273,8 +283,12 @@
                         <div class="product-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="inc/img/product/<?php echo $row['Thumbnail']; ?>" alt="">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square add-to-cart" data-id="<?php echo $row['ProductId']; ?>"><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href="functions.php?wish&id=<?php echo $row['ProductId']; ?>"><i class="far fa-heart"></i></a>
+                            <?php if(!empty($sessionId)){ ?> 
+                            <a class="btn btn-outline-dark btn-square add-to-cart" data-id="<?php echo $row['ProductId']; ?>" ><i class="fa fa-shopping-cart"></i></a> 
+                            <?php }else{ ?>
+                            <a class="btn btn-outline-dark btn-square"  onclick="ShowLogin()"><i class="fa fa-shopping-cart"></i></a> 
+                            <?php   }  ?>
+                            <a class="btn btn-outline-dark btn-square" href="functions.php?wish&id=<?php echo $row['ProductId']; ?>"><i class="far fa-heart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                             </div>
@@ -308,7 +322,6 @@
 <?php include('layout/footer.php'); ?>
 
     <!-- JavaScript Libraries -->
-    <?php include('layout/script.php'); ?>
 
 </body>
 

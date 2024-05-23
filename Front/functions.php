@@ -5,27 +5,33 @@
 
      if(isset($_POST['register'])){
 
-     $fullName            = $_POST['full_name'];
-     $userName            = $_POST['user_name'];
-     $email               = $_POST['email'];
-     $phone               = $_POST['phone'];
-     $password            = $_POST['password'];
-     $confirm_password    = $_POST['confirm_password'];
-     $gender              = $_POST['gender'];
+     $fullName              = $_POST['full_name'];
+     $email                 = $_POST['email'];
+     $address               = $_POST['address'];
+     $phone                 = $_POST['phone'];
+     $password              = $_POST['password'];
+     $confirm_password      = $_POST['confirm_password'];
+     $gender                = $_POST['gender'];
+     $userName              = str_replace(' ', '_', $fullName.rand(1,100));
+
 
         if($password == $confirm_password){
           $Password  = sha1($password);
-        $RegisterSql = mysqli_query($db,"INSERT INTO users (FullName,UserName,Email,Mobile,Gender,Password,Date)VALUES('$fullName','$userName','$email','$phone','$gender','$Password',now())");
+        $RegisterSql = mysqli_query($db,"INSERT INTO users (FullName,UserName,Email,Address,Mobile,Gender,Password,Date)VALUES('$fullName','$userName','$email','$address','$phone','$gender','$Password',now())");
          if($RegisterSql){
           header("location:index.php");
          }else{
           die("mysqli_error".mysqli_error($db));
          }
         }else{
-        $LogInError = "Password Not Match";
-
-      } 
-      }
+          ?>
+       <script> alert('password does not match');
+     window.history.back();
+      </script>
+    <?php
+    } 
+  
+  }
 
       //LOGIN QUERY
       if(isset($_POST['login'])){
@@ -126,7 +132,34 @@
         
        }
 
+         // Cart decrement
+         if(isset($_POST['MinusId'])){
+        
+          $id = $_POST['MinusId'];
+       
+          $ProductExisting            = mysqli_query($db,"SELECT * FROM cart WHERE Id ='$id'")->fetch_assoc();
+          
+          $cartId                     = $ProductExisting['ProductId'];
   
+          $row                        = mysqli_query($db,"SELECT * FROM products WHERE ProductId ='$cartId'")->fetch_assoc();
+          $price                      = $row['DiscountPrice'];
+          $Quantity                   = $ProductExisting['Quantity']-1;
+          $Price                      = $ProductExisting['Price']-$price;
+  
+  
+          $sql = "UPDATE cart SET Quantity='$Quantity', Price='$Price' WHERE Id = '$id'";
+          if ($db->query($sql) === TRUE) {
+              echo "Product added to cart!";
+          } else {
+              echo "Error: " . $sql . "<br>" . $db->error;
+          }
+          
+         }
+
+
+
+
+
       // Cart Delete Query
 
       if(isset($_GET['delete_cart'])){
@@ -183,7 +216,7 @@
 
 
      // CheckOut Query
-     if($_SERVER['REQUEST_METHOD'] == 'POST'){
+     if(isset($_POST['checkout'])){
       $id           = $_SESSION['UserId'];
 
       $sql        = mysqli_query($db, "SELECT * FROM users WHERE UserId = '$id'")->fetch_Assoc();
@@ -219,7 +252,25 @@
 
       }
 
+      //  Contact Us
 
+      if(isset($_POST['contact'])){
+        // $Usersql        = mysqli_query($db, "SELECT * FROM users WHERE UserId = '$id'")->fetch_Assoc();
+        $id             = $_SESSION['UserId'];
+        $name           = $_SESSION['FullName'];
+        $email          = $_SESSION['Email'];
+        $subject        = mysqli_real_escape_string($db,$_POST['subject']);
+        $message        = mysqli_real_escape_string($db,$_POST['message']);
+        
 
+        $sql = mysqli_query($db,"INSERT INTO inbox (UserId,Name,Email,Subject,Message,Date)VALUES('$id','$name','$email','$subject','$message',now())");
 
+      if($sql){
+        header("Location: {$_SERVER['HTTP_REFERER']}");
+
+      }else{
+        die("mysqli error". mysqli_error($db));
+
+      }
+      }
        ?>

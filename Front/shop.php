@@ -186,7 +186,11 @@
                             <div class="product-img position-relative overflow-hidden">
                                 <img class="img-fluid w-100" src="inc/img/product/<?php echo $row['Thumbnail']; ?>" alt="">
                                 <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square add-to-cart" data-id="<?php echo $row['ProductId']; ?>"><i class="fa fa-shopping-cart"></i></a>
+                                <?php if(!empty($sessionId)){ ?> 
+                                <a class="btn btn-outline-dark btn-square add-to-cart" data-id="<?php echo $row['ProductId']; ?>" ><i class="fa fa-shopping-cart"></i></a> 
+                                <?php }else{ ?>
+                                <a class="btn btn-outline-dark btn-square"  onclick="ShowLogin()"><i class="fa fa-shopping-cart"></i></a> 
+                                <?php   }  ?>
                                     <a class="btn btn-outline-dark btn-square" href="functions.php?wish&id=<?php echo $row['ProductId']; ?>"><i class="far fa-heart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
@@ -234,7 +238,6 @@
 <?php include('layout/footer.php'); ?>
 
     <!-- JavaScript Libraries -->
-    <?php include('layout/script.php'); ?>
 
 </body>
 

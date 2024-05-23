@@ -19,7 +19,6 @@
 <?php include('layout/footer.php'); ?>
 
     <!-- JavaScript Libraries -->
-    <?php include('layout/script.php'); ?>
 
 </body>
 

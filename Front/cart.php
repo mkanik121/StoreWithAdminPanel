@@ -63,11 +63,11 @@
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
+                                        <button class="btn btn-sm btn-primary btn-minus CartMinus" data-id="<?php echo $row['Id']; ?>">
                                         <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center plus" value="<?php echo $row['Quantity']; ?>">
+                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center result" value="<?php echo $row['Quantity']; ?>">
                                     <div class="input-group-btn">
                                         <button class="btn btn-sm btn-primary btn-plus CartPlus" data-id="<?php echo $row['Id']; ?>">
                                             <i class="fa fa-plus"></i>
@@ -149,8 +149,7 @@
     <!-- Back to Top -->
 <?php include('layout/footer.php'); ?>
 
-    <!-- JavaScript Libraries -->
-    <?php include('layout/script.php'); ?>
+
 
 </body>
 

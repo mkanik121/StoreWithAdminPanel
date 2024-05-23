@@ -64,11 +64,25 @@
     // Cart Increase
 
     $('.CartPlus').click(function(){
-        var Plus = $(this).attr('data-id');
+        var result = $(this).attr('data-id');
                  $.ajax({
                     url: 'functions.php',
                     type: 'post',
-                    data: {PlusId: Plus},
+                    data: {PlusId: result},
+                    success: function(response){
+                        // alert("Product added to cart successfully!");
+                    }
+                });
+       })
+
+           // Cart decrement
+
+    $('.CartMinus').click(function(){
+        var result = $(this).attr('data-id');
+                 $.ajax({
+                    url: 'functions.php',
+                    type: 'post',
+                    data: {MinusId: result},
                     success: function(response){
                         // alert("Product added to cart successfully!");
                     }
